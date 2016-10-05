@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class Example {
     private static final Logger logger = LoggerFactory.getLogger(Example.class);
-    private static final String GRAPH_HOST = "192.168.56.20";
+    private static final String GRAPH_HOST = "XXX.XXX.XXX.XXX";
     private static final String GRAPH_NAME = "Customer";
 
     public static void main(String[] args){
