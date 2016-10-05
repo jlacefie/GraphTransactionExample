@@ -21,6 +21,11 @@ public class Example {
     }
 
     private Example() {
+        String cName1 = "customer21";
+        String cName2 = "customer22";
+        String age1 = "11";
+        String age2 = "41";
+
         DseCluster dseCluster = DseCluster.builder()
                 .addContactPoint(GRAPH_HOST).build();
         DseSession dseSession = dseCluster.connect();
@@ -29,11 +34,19 @@ public class Example {
 
         // add vertices and edges
         logger.debug("Test File Output: " + getQuery("Traversal"));
-        GraphStatement s1 = new SimpleGraphStatement(getQuery("Traversal")).setGraphName(GRAPH_NAME);
+        GraphStatement s1 = new SimpleGraphStatement(getQuery("Traversal"))
+                .set("cName1", cName1)
+                .set("cName2", cName2)
+                .set("age1", age1)
+                .set("age2", age2)
+                .setGraphName(GRAPH_NAME);
+
         dseSession.executeGraph(s1);
 
         // Query the graph for the new vertex
-        GraphStatement s2 = new SimpleGraphStatement("g.V().hasLabel('customer').out()").setGraphName(GRAPH_NAME);
+        GraphStatement s2 = new SimpleGraphStatement("g.V().has('customer','name',cName1).out()")
+                .set("cName1", cName1)
+                .setGraphName(GRAPH_NAME);
         GraphResultSet rs = dseSession.executeGraph(s2);
         VertexProperty vp = rs.one().asVertex().getProperty("name");
 
