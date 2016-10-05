@@ -1,0 +1,5 @@
+def c1 = g.addV(label, 'customer', 'name', 'customer3', 'age', '11').next()
+def c2 = g.addV(label, 'customer', 'name', 'customer4', 'age', '21').next()
+def v1 = g.V(c1.id()).next()
+def v2 = g.V(c2.id()).next()
+v1.addEdge('related', v2)
